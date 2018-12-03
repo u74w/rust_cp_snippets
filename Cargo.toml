@@ -1,0 +1,8 @@
+[package]
+name = "rust_cp_snippets"
+version = "0.1.0"
+authors = ["p232069y <p232069y@mail.kyutech.jp>"]
+edition = "2018"
+
+[dependencies]
+cargo-snippet = "0.2.5"
