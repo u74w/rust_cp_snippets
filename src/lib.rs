@@ -4,6 +4,6 @@
 
 extern crate test;
 
-pub mod templalte;
+pub mod template;
 pub mod modulo;
-
+pub mod util;
