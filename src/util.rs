@@ -22,3 +22,25 @@ fn test_matrix_swap() {
     assert_eq!(v[1][0], 3);
 }
 
+#[snippet = "adjacent4"]
+pub fn adjacent4(x: usize, y: usize, xsize: usize, ysize: usize) -> Vec<(usize, usize)> {
+    [(1, 0), (0, 1), (-1, 0), (0, -1)]
+        .into_iter()
+        .filter_map(|&(dx, dy)| {
+            let nx = x as isize + dx;
+            let ny = y as isize + dy;
+            if nx >= 0 && nx < xsize as isize && ny >= 0 && ny < ysize as isize {
+                Some((nx as usize, ny as usize))
+            } else {
+                None
+            }
+        })
+        .collect()
+}
+
+#[test]
+fn test_adjacent4() {
+    assert_eq!(adjacent4(1, 1, 3, 3), vec![(2, 1), (1, 2), (0, 1), (1, 0)]);
+    assert_eq!(adjacent4(1, 1, 2, 2), vec![(0, 1), (1, 0)]);
+    assert_eq!(adjacent4(0, 0, 2, 2), vec![(1, 0), (0, 1)]);
+}
