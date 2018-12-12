@@ -92,11 +92,17 @@ macro_rules! debug {
 
 #[snippet = "template"]
 #[allow(dead_code)]
+fn main() {
+    input!{}
+}
+
+#[snippet = "big_stack"]
+#[allow(dead_code)]
 const BIG_STACK_SIZE: bool = true;
 
-#[snippet = "template"]
+#[snippet = "big_stack"]
 #[allow(dead_code)]
-fn main() {
+fn big_stack() {
 	use std::thread;
 	if BIG_STACK_SIZE {
 		thread::Builder::new()
@@ -111,9 +117,7 @@ fn main() {
 	}
 }
 
-#[snippet = "template"]
+#[snippet = "big_stack"]
 #[allow(dead_code)]
-fn solve() {
-
-}
+fn solve() {}
 
