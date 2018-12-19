@@ -1,3 +1,7 @@
+#[snippet = "MOD"]
+#[allow(dead_code)]
+pub const MOD: u64 = 1_000_000_007;
+
 #[snippet = "gcd"]
 #[allow(dead_code)]
 pub fn gcd(a: u64, b: u64) -> u64 {
@@ -29,24 +33,22 @@ pub fn extgcd(a: i64, b: i64) -> (i64, i64, i64) {
 
 #[snippet = "prime"]
 #[allow(dead_code)]
-pub fn prime(n: usize) -> Vec<bool> {
+pub fn prime(n: u64) -> Vec<bool> {
     let mut prime: Vec<bool> = vec![true; (n+1) as usize];
     prime[0] = false;
     if n >= 1 { prime[1] = false;}
     let mut i = 2_usize;
-    loop {
-        if i * i > n { break; }
+    while i * i <= n as usize {
         if prime[i] {
             let mut j = i + i;
-            loop {
-                if j > n { break; }
+            while j <= n as usize {
                 prime[j] = false;
                 j += i;
             }
         }
         i += 1;
     }
-    return prime;
+    prime
 }
 
 #[snippet = "divisor"]
@@ -64,14 +66,15 @@ pub fn divisor(n: u64) -> Vec<u64> {
         i += 1;
     }
     div.sort();
-    return div;
+    div
 }
 
 use std::collections::HashMap;
 #[snippet = "prime_factor"]
 #[allow(dead_code)]
-pub fn prime_factor(mut n: u64) -> HashMap<u64, u64> {
+pub fn prime_factor(n: u64) -> HashMap<u64, u64> {
     let mut prime_factors: HashMap<u64, u64> = HashMap::with_capacity(n as usize);
+    let mut n = n;
     let mut i = 2;
     while i * i <= n {
         while n % i == 0 {
@@ -87,7 +90,23 @@ pub fn prime_factor(mut n: u64) -> HashMap<u64, u64> {
     if n != 1 {
         prime_factors.insert(n, 1);
     }
-    return prime_factors;
+    prime_factors
+}
+
+#[snippet = "mod_pow"]
+#[allow(dead_code)]
+pub fn mod_pow(x: u64, n: u64, m: u64) -> u64 {
+    let mut res = 1;
+    let mut x = x % m;
+    let mut n = n;
+    while n > 0 {
+        if n & 1 == 1 {
+            res = (res * x) % m;
+        }
+        x = (x * x) % m;
+        n >>= 1;
+    }
+    res
 }
 
 #[test]
@@ -111,4 +130,11 @@ fn test_prime_factor() {
     let mut hoge: HashMap<u64, u64> = HashMap::new();
     hoge.insert(2, 3);
     assert_eq!(prime_factor(8), hoge);
+}
+
+#[test]
+fn test_mod_pow() {
+    assert_eq!(mod_pow(2, 3, MOD), 8);
+    assert_eq!(mod_pow(2, 3, 6), 2);
+    assert_eq!(mod_pow(2, 10, MOD), 1024);
 }
