@@ -54,7 +54,7 @@ pub fn prime(n: u64) -> Vec<bool> {
 #[snippet = "divisor"]
 #[allow(dead_code)]
 pub fn divisor(n: u64) -> Vec<u64> {
-    let mut div: Vec<u64> = Vec::with_capacity(n as usize);
+    let mut div: Vec<u64> = Vec::new();
     let mut i = 1;
     while i * i <= n {
         if n % i == 0 {
@@ -73,13 +73,14 @@ use std::collections::HashMap;
 #[snippet = "prime_factor"]
 #[allow(dead_code)]
 pub fn prime_factor(n: u64) -> HashMap<u64, u64> {
-    let mut prime_factors: HashMap<u64, u64> = HashMap::with_capacity(n as usize);
+    let mut prime_factors: HashMap<u64, u64> = HashMap::new();
     let mut n = n;
     let mut i = 2;
     while i * i <= n {
         while n % i == 0 {
             if prime_factors.contains_key(&i) {
-                prime_factors.insert(i, prime_factors[&i]+1);
+                let exponent = prime_factors[&i];
+                prime_factors.insert(i, exponent + 1);
             } else {
                 prime_factors.insert(i, 1);
             }
@@ -130,6 +131,9 @@ fn test_prime_factor() {
     let mut hoge: HashMap<u64, u64> = HashMap::new();
     hoge.insert(2, 3);
     assert_eq!(prime_factor(8), hoge);
+    hoge.clear();
+    hoge.insert(1_000_000_007, 1);
+    assert_eq!(prime_factor(1_000_000_007), hoge);
 }
 
 #[test]
