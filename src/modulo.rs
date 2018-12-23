@@ -110,6 +110,13 @@ pub fn mod_pow(x: u64, n: u64, m: u64) -> u64 {
     res
 }
 
+#[snippet = "mod_inv"]
+#[allow(dead_code)]
+pub fn mod_inv(a: u64, m: u64) -> u64 {
+    let (_, x, _) = extgcd(a as i64, m as i64);
+    ((m as i64 + x) as u64 % m) % m
+}
+
 #[test]
 fn test_lcm() {
     assert_eq!(lcm(3, 5), 15);
