@@ -79,8 +79,8 @@ pub fn prime_factor(n: u64) -> HashMap<u64, u64> {
     while i * i <= n {
         while n % i == 0 {
             if prime_factors.contains_key(&i) {
-                let exponent = prime_factors[&i];
-                prime_factors.insert(i, exponent + 1);
+                let exponent = prime_factors[&i] + 1;
+                prime_factors.insert(i, exponent);
             } else {
                 prime_factors.insert(i, 1);
             }
