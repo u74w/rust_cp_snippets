@@ -73,13 +73,53 @@ macro_rules! read_value {
         $next().parse::<$t>().expect("Parse error")
     };
 }
-
 #[snippet = "template"]
 #[allow(dead_code)]
 pub fn with_bufwriter<F: FnOnce(BufWriter<StdoutLock>) -> ()>(f: F) {
     let out = stdout();
     let writer = BufWriter::new(out.lock());
     f(writer)
+}
+
+#[snippet = "template"]
+#[allow(dead_code)]
+struct Writer {
+    s: String,
+}
+#[snippet = "template"]
+#[allow(dead_code)]
+use std::fmt::Display;
+impl Writer {
+    #[allow(dead_code)]
+    pub fn new() -> Writer {
+        Writer {
+            s: String::new(),
+        }
+    }
+    #[allow(dead_code)]
+    pub fn flush(&mut self) {
+        print!("{}", self.s);
+        self.s.clear();
+    }
+    pub fn write<T: Display>(&mut self, x: T) {
+        self.s.push_str(&format!("{}", x));
+    }
+    pub fn writeln<T: Display>(&mut self, x: T) {
+        self.s.push_str(&format!("{}", x));
+        self.s.push('\n');
+    }
+    #[allow(dead_code)]
+    pub fn write_vec<T: Display>(&mut self, xs: &Vec<T>) {
+        if xs.len() == 0 {
+            self.writeln("");
+            return;
+        }
+        self.write(&format!("{}", xs[0]));
+        for i in 1..xs.len() {
+            self.write(&format!(" {}", xs[i]));
+        }
+        self.writeln("");
+    }
 }
 
 #[snippet = "template"]
