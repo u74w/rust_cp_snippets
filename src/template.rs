@@ -79,9 +79,13 @@ macro_rules! read_value {
 struct Writer {
     s: String,
 }
+
+#[snippet = "template"]
+#[allow(unused_imports)]
+use std::fmt::Display;
+
 #[snippet = "template"]
 #[allow(dead_code)]
-use std::fmt::Display;
 impl Writer {
     #[allow(dead_code)]
     pub fn new() -> Writer {
