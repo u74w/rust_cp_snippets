@@ -7,3 +7,4 @@ extern crate test;
 pub mod template;
 pub mod modulo;
 pub mod util;
+pub mod union_find;

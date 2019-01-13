@@ -73,13 +73,6 @@ macro_rules! read_value {
         $next().parse::<$t>().expect("Parse error")
     };
 }
-#[snippet = "template"]
-#[allow(dead_code)]
-pub fn with_bufwriter<F: FnOnce(BufWriter<StdoutLock>) -> ()>(f: F) {
-    let out = stdout();
-    let writer = BufWriter::new(out.lock());
-    f(writer)
-}
 
 #[snippet = "template"]
 #[allow(dead_code)]
