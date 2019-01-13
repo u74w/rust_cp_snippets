@@ -86,6 +86,10 @@ use std::fmt::Display;
 
 #[snippet = "template"]
 #[allow(dead_code)]
+/// let mut writer = Writer::new();
+/// writer.writeln(hoge);
+/// ...
+/// writer.flush()
 impl Writer {
     #[allow(dead_code)]
     pub fn new() -> Writer {
