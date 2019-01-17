@@ -44,3 +44,35 @@ fn test_adjacent4() {
     assert_eq!(adjacent4(1, 1, 2, 2), vec![(0, 1), (1, 0)]);
     assert_eq!(adjacent4(0, 0, 2, 2), vec![(1, 0), (0, 1)]);
 }
+
+use std::cmp::Ordering;
+
+#[snippet = "Rev"]
+#[derive(Eq, PartialEq, Clone, Debug)]
+/// Equivalent to std::cmp::Reverse
+/// vector.sort_by_key(|&x| Rev(x));
+pub struct Rev<T>(pub T);
+
+#[snippet = "Rev"]
+impl<T: PartialOrd> PartialOrd for Rev<T> {
+    fn partial_cmp(&self, other: &Rev<T>) -> Option<Ordering> {
+        other.0.partial_cmp(&self.0)
+    }
+}
+
+#[snippet = "Rev"]
+impl<T: Ord> Ord for Rev<T> {
+    fn cmp(&self, other: &Rev<T>) -> Ordering {
+        other.0.cmp(&self.0)
+    }
+}
+
+#[test]
+fn test_rev() {
+    let mut vec = vec![2, 6, 1, 8, 4, 5, 3, 6];
+    vec.sort_by_key(|&x| Rev(x));
+
+    for w in vec.windows(2) {
+        assert!(w[0] >= w[1]);
+    }
+}

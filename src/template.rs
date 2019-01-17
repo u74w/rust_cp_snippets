@@ -123,12 +123,11 @@ impl Writer {
     }
 }
 
-#[snippet = "template"]
 #[allow(unused_macros)]
 macro_rules! debug {
-	($($a:expr),*) => {
-		eprintln!(concat!($(stringify!($a), " = {:?}, "),*), $($a),*)
-	};
+    ($($a:expr),*) => {
+        writeln!(&mut stderr(), concat!($(stringify!($a), " = {:?}, "),*), $($a),*).unwrap();
+    }
 }
 
 #[snippet = "template"]
