@@ -1,6 +1,6 @@
 #[snippet = "template"]
 #[allow(unused_imports)]
-use std::io::{stdin, stdout, BufWriter, Write, StdoutLock};
+use std::io::{stdin, stdout, stderr, BufWriter, Write, StdoutLock};
 #[snippet = "template"]
 #[allow(unused_imports)]
 use std::cmp::{max, min, Ordering};
@@ -86,10 +86,9 @@ use std::fmt::Display;
 
 #[snippet = "template"]
 #[allow(dead_code)]
-// let mut writer = Writer::new();
-// writer.writeln(hoge);
-// ...
-// writer.flush()
+/// let mut writer = Writer::new();
+/// writer.writeln(hoge);
+/// writer.flush()
 impl Writer {
     #[allow(dead_code)]
     pub fn new() -> Writer {
@@ -123,8 +122,9 @@ impl Writer {
     }
 }
 
+#[snippet = "template"]
 #[allow(unused_macros)]
-macro_rules! debug {
+macro_rules! dbg {
     ($($a:expr),*) => {
         writeln!(&mut stderr(), concat!($(stringify!($a), " = {:?}, "),*), $($a),*).unwrap();
     }
