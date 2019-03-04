@@ -44,6 +44,11 @@ macro_rules! input_inner {
         let $var = read_value!($next, $t);
         input_inner!{$next $($r)*}
     };
+
+    ($next:expr, mut $var:ident : $t:tt $($r:tt)*) => {
+        let mut $var = read_value!($next, $t);
+        input_inner!{$next $($r)*}
+    };
 }
 
 #[snippet = "template"]
@@ -55,6 +60,13 @@ macro_rules! read_value {
 
     ($next:expr, [ $t:tt ; $len:expr ]) => {
         (0..$len).map(|_| read_value!($next, $t)).collect::<Vec<_>>()
+    };
+
+    ($next:expr, [ $t:tt ]) => {
+        {
+            let len = read_value!($next, usize);
+            (0..len).map(|_| read_value!($next, $t)).collect::<Vec<_>>()
+        }
     };
 
     ($next:expr, chars) => {

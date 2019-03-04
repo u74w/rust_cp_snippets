@@ -1,8 +1,9 @@
 #[snippet = "UnionFind"]
 #[allow(dead_code)]
 pub struct UnionFind {
-    pub parent: Vec<usize>,
-    pub rank: Vec<usize>,
+    parent: Vec<usize>,
+    rank: Vec<usize>,
+    size: Vec<usize>
 }
 
 #[snippet = "UnionFind"]
@@ -12,6 +13,7 @@ impl UnionFind {
         UnionFind {
             parent: (0..n).collect(),
             rank: vec![0; n],
+            size: vec![1; n]
         }
     }
     #[allow(dead_code)]
@@ -34,15 +36,22 @@ impl UnionFind {
         }
         if self.rank[x] < self.rank[y] {
             self.parent[x] = y;
+            self.size[y] += self.size[x];
         } else {
             self.parent[y] = x;
+            self.size[x] += self.size[y];
             if self.rank[x] == self.rank[y] {
                 self.rank[x] += 1;
             }
         }
     }
     #[allow(dead_code)]
-    pub fn same(&mut self, x: usize, y: usize) -> bool {
+    pub fn size(&mut self, x: usize) -> usize {
+        let r = self.root(x);
+        self.size[r]
+    }
+    #[allow(dead_code)]
+    pub fn is_same(&mut self, x: usize, y: usize) -> bool {
         self.root(x) == self.root(y)
     }
 }
@@ -51,12 +60,15 @@ impl UnionFind {
 fn test_union_find() {
     let mut uft = UnionFind::new(5);
     let info = vec![(0, 1), (1, 2), (3, 4)];
+    assert_eq!(uft.size(0), 1);
     for (i, j) in info {
-        uft.parent[j] = i;
+        uft.unite(i, j);
     }
-    assert!(uft.same(0, 1));
+    assert!(uft.is_same(0, 1));
     assert_eq!(uft.root(2), 0);
     assert_eq!(uft.root(3), 3);
+    assert_eq!(uft.size(0), 3);
     uft.unite(0, 4);
-    assert!(uft.same(0, 4));
+    assert!(uft.is_same(0, 4));
+    assert_eq!(uft.size(0), 5);
 }
