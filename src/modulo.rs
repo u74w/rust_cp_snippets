@@ -1,5 +1,6 @@
 #[snippet = "mod"]
 #[allow(dead_code)]
+///Referenced from https://github.com/hatoo/competitive-rust-snippets
 pub const MOD: u64 = 1_000_000_007;
 
 #[snippet = "mod"]
@@ -141,7 +142,7 @@ pub fn fact_inv_table(size: usize, m: u64) -> (Vec<u64>, Vec<u64>) {
 
 #[snippet = "mod"]
 #[allow(dead_code)]
-/// (a mod p, e when n! = a p\^e)
+/// (a mod p, e when n! = a pe)
 pub fn mod_fact(n: u64, p: u64, fact: &[u64]) -> (u64, u64) {
     if n == 0 {
         (1, 0)
