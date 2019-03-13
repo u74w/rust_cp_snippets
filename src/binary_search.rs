@@ -3,8 +3,8 @@ use std::cmp::Ordering;
 #[snippet = "BinarySearch"]
 ///Referenced from https://github.com/hatoo/competitive-rust-snippets
 pub trait BinarySearch<T> {
-    fn lower_bound(&self, &T) -> usize;
-    fn upper_bound(&self, &T) -> usize;
+    fn lower_bound(&self, x: &T) -> usize;
+    fn upper_bound(&self, x: &T) -> usize;
 }
 
 #[snippet = "BinarySearch"]
@@ -53,5 +53,5 @@ fn test_binary_search() {
     assert_eq!(vec.lower_bound(&4), 2);
     assert_eq!(vec.upper_bound(&4), 3);
     assert_eq!(vec.lower_bound(&3), 2);
-    assert_eq!(vec.upper_bound(&3), 3);
+    assert_eq!(vec.upper_bound(&3), 2);
 }

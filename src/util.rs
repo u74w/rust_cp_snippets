@@ -51,7 +51,7 @@ use std::cmp::Ordering;
 #[snippet = "Rev"]
 #[derive(Eq, PartialEq, Clone, Debug)]
 /// vector.sort_by_key(|&x| Rev(x));
-pub struct Rev<T>(pub T);
+struct Rev<T>(pub T);
 
 #[snippet = "Rev"]
 impl<T: PartialOrd> PartialOrd for Rev<T> {
@@ -74,5 +74,29 @@ fn test_rev() {
 
     for w in vec.windows(2) {
         assert!(w[0] >= w[1]);
+    }
+}
+
+#[snippet = "Total"]
+#[derive(PartialEq, PartialOrd)]
+pub struct Total<T>(pub T);
+
+#[snippet = "Total"]
+impl<T: PartialEq> Eq for Total<T> {}
+
+#[snippet = "Total"]
+impl<T: PartialOrd> Ord for Total<T> {
+    fn cmp(&self, other: &Total<T>) -> std::cmp::Ordering {
+        self.0.partial_cmp(&other.0).unwrap()
+    }
+}
+
+#[test]
+fn test_total() {
+    let mut vec = vec![2.1, 6.5, 1.0, 8.32, 4.5, 5.2, 3.3, 6.5];
+    vec.sort_by_key(|&x| Total(x));
+
+    for w in vec.windows(2) {
+        assert!(w[0] <= w[1]);
     }
 }
