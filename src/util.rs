@@ -23,7 +23,7 @@ fn test_matrix_swap() {
 }
 
 #[snippet = "adjacent4"]
-///Referenced from https://github.com/hatoo/competitive-rust-snippets
+///refer to https://github.com/hatoo/competitive-rust-snippets
 pub fn adjacent4(x: usize, y: usize, xsize: usize, ysize: usize) -> Vec<(usize, usize)> {
     [(1, 0), (0, 1), (-1, 0), (0, -1)]
         .into_iter()
@@ -50,7 +50,7 @@ use std::cmp::Ordering;
 
 #[snippet = "Rev"]
 #[derive(Eq, PartialEq, Clone, Debug)]
-/// vector.sort_by_key(|&x| Rev(x));
+///vector.sort_by_key(|&x| Rev(x));
 struct Rev<T>(pub T);
 
 #[snippet = "Rev"]

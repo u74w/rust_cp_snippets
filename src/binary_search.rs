@@ -1,7 +1,7 @@
 use std::cmp::Ordering;
 
 #[snippet = "BinarySearch"]
-///Referenced from https://github.com/hatoo/competitive-rust-snippets
+///refer to https://github.com/hatoo/competitive-rust-snippets
 pub trait BinarySearch<T> {
     fn lower_bound(&self, x: &T) -> usize;
     fn upper_bound(&self, x: &T) -> usize;

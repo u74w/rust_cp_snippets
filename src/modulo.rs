@@ -1,6 +1,6 @@
 #[snippet = "mod"]
 #[allow(dead_code)]
-///Referenced from https://github.com/hatoo/competitive-rust-snippets
+///refer to https://github.com/hatoo/competitive-rust-snippets
 pub const MOD: u64 = 1_000_000_007;
 
 #[snippet = "mod"]

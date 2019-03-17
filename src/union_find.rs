@@ -1,6 +1,6 @@
 #[snippet = "UnionFind"]
 #[allow(dead_code)]
-///Referenced from https://github.com/hatoo/competitive-rust-snippets
+///refer to https://github.com/hatoo/competitive-rust-snippets
 struct UnionFind {
     parent: Vec<usize>,
     rank: Vec<usize>,
