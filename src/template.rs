@@ -10,6 +10,9 @@ use std::collections::{BTreeMap, BTreeSet, BinaryHeap, HashMap, HashSet, VecDequ
 #[snippet = "template"]
 #[allow(unused_imports)]
 use std::iter::FromIterator;
+#[snippet = "template"]
+#[allow(unused_imports)]
+use std::{usize, u64, i64};
 
 #[snippet = "template"]
 #[allow(unused_macros)]
@@ -144,8 +147,19 @@ macro_rules! dbg {
 
 #[snippet = "template"]
 #[allow(dead_code)]
+const INF_U: u64 = 1_000_000_000_000_000;
+
+#[snippet = "template"]
+#[allow(dead_code)]
+const INF_I: i64 = 1_000_000_000_000_000;
+
+
+#[snippet = "template"]
+#[allow(non_snake_case)]
+#[allow(dead_code)]
 fn main() {
     input!{}
+    let ans: u64;
 }
 
 #[snippet = "big_stack"]
