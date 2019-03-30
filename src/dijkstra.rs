@@ -36,32 +36,30 @@ struct Edge {
 #[snippet = "dijkstra"]
 struct Dijkstra<'a> {
     adj_list: &'a Vec<Vec<Edge>>,
-    dist: Vec<usize>,
-    prev: Vec<usize>,
-    start: usize,
-    goal: usize
+    dist    : Vec<usize>,
+    prev    : Vec<usize>,
+    start   : usize
 }
 
 #[snippet = "dijkstra"]
 impl<'a> Dijkstra<'a> {
     #[allow(dead_code)]
-    fn new(adj_list: &'a Vec<Vec<Edge>>, start: usize, goal: usize) -> Self {
+    fn new(adj_list: &'a Vec<Vec<Edge>>, start: usize) -> Self {
         Dijkstra {
             adj_list: adj_list,
-            dist: (0..adj_list.len()).map(|_| usize::MAX).collect(),
-            prev: (0..adj_list.len()).map(|_| usize::MAX).collect(),
-            start: start,
-            goal: goal
+            dist    : (0..adj_list.len()).map(|_| usize::MAX).collect(),
+            prev    : (0..adj_list.len()).map(|_| usize::MAX).collect(),
+            start   : start
         }
     }
 
     #[allow(dead_code)]
-    fn shortest_dist(&mut self) -> Option<usize> {
+    fn shortest_dist(&mut self, goal: usize) -> Option<usize> {
+        if self.dist[goal] != usize::MAX { return Some(self.dist[goal]); }
         let mut heap = BinaryHeap::new();
         self.dist[self.start] = 0;
         heap.push(State { cost: 0, position: self.start });
         while let Some(State { cost, position }) = heap.pop() {
-            if position == self.goal { return Some(cost); }
             if cost > self.dist[position] { continue; }
 
             for edge in &self.adj_list[position] {
@@ -73,14 +71,17 @@ impl<'a> Dijkstra<'a> {
                 }
             }
         }
-        None
+        match self.dist[goal] {
+            usize::MAX => None,
+            _          => Some(self.dist[goal])
+        }
     }
 
     #[allow(dead_code)]
-    fn shortest_path(&self) -> Option<Vec<usize>> {
-        if self.dist[self.goal] == usize::MAX { return None; }
+    fn shortest_path(&self, goal: usize) -> Option<Vec<usize>> {
+        if self.dist[goal] == usize::MAX { return None; }
         let mut path = Vec::new();
-        let mut p = self.goal;
+        let mut p = goal;
         while p != usize::MAX {
             path.push(p);
             p = self.prev[p];
@@ -92,6 +93,18 @@ impl<'a> Dijkstra<'a> {
 
 #[test]
 fn test_dijkstra() {
+    //                  7
+    //          +-----------------+
+    //          |                 |
+    //          v   1        2    |  2
+    //          0 -----> 1 -----> 3 ---> 4
+    //          |        ^        ^      ^
+    //          |        | 1      |      |
+    //          |        |        | 3    | 1
+    //          +------> 2 -------+      |
+    //           10      |               |
+    //                   +---------------+
+    //
     let graph = vec![
             // Node 0
             vec![Edge { node: 2, cost: 10 },
@@ -106,15 +119,16 @@ fn test_dijkstra() {
             vec![Edge { node: 0, cost: 7 },
                 Edge { node: 4, cost: 2 }],
             // Node 4
-            vec![]];
+            vec![]
+    ];
 
-    let mut dijkstra = Dijkstra::new(&graph, 0, 1);
-    assert_eq!(dijkstra.shortest_dist(), Some(1));
-    assert_eq!(dijkstra.shortest_path(), Some(vec![0, 1]));
-    let mut dijkstra = Dijkstra::new(&graph, 0, 3);
-    assert_eq!(dijkstra.shortest_dist(), Some(3));
-    assert_eq!(dijkstra.shortest_path(), Some(vec![0, 1, 3]));
-    let mut dijkstra = Dijkstra::new(&graph, 4, 0);
-    assert_eq!(dijkstra.shortest_dist(), None);
-    assert_eq!(dijkstra.shortest_path(), None);
+    let mut dijkstra = Dijkstra::new(&graph, 0);
+    assert_eq!(dijkstra.shortest_dist(1), Some(1));
+    assert_eq!(dijkstra.shortest_path(1), Some(vec![0, 1]));
+    //let mut dijkstra = Dijkstra::new(&graph);
+    assert_eq!(dijkstra.shortest_dist(3), Some(3));
+    assert_eq!(dijkstra.shortest_path(3), Some(vec![0, 1, 3]));
+    let mut dijkstra = Dijkstra::new(&graph, 4);
+    assert_eq!(dijkstra.shortest_dist(0), None);
+    assert_eq!(dijkstra.shortest_path(0), None);
 }
