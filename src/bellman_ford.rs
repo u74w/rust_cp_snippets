@@ -1,10 +1,10 @@
 use std::usize;
-use std::isize;
+use std::i64;
 
 #[snippet = "bellman_ford"]
 #[derive(Copy, Clone, Eq, PartialEq)]
 struct State {
-    cost: isize,
+    cost: i64,
     position: usize,
 }
 
@@ -12,13 +12,13 @@ struct State {
 #[derive(Clone)]
 struct Edge {
     node: usize,
-    cost: isize,
+    cost: i64,
 }
 
 #[snippet = "bellman_ford"]
 struct BellmanFord<'a> {
     adj_list     : &'a Vec<Vec<Edge>>,
-    dist         : Vec<isize>,
+    dist         : Vec<i64>,
     prev         : Vec<usize>,
     start        : usize,
     negative_loop: bool
@@ -30,7 +30,7 @@ impl<'a> BellmanFord<'a> {
     fn new(adj_list: &'a Vec<Vec<Edge>>, start: usize) -> Self {
         BellmanFord {
             adj_list     : adj_list,
-            dist         : (0..adj_list.len()).map(|_| isize::MAX).collect(),
+            dist         : (0..adj_list.len()).map(|_| i64::MAX).collect(),
             prev         : (0..adj_list.len()).map(|_| usize::MAX).collect(),
             start        : start,
             negative_loop: false
@@ -38,14 +38,14 @@ impl<'a> BellmanFord<'a> {
     }
 
     #[allow(dead_code)]
-    fn shortest_dist(&mut self, goal: usize) -> Option<isize> {
+    fn shortest_dist(&mut self, goal: usize) -> Option<i64> {
         if !self.negative_loop && self.dist[self.start] == 0 { return Some(self.dist[goal]); }
         self.dist[self.start] = 0;
         for cnt in 0..self.adj_list.len() {
             let mut update = false;
             for i in 0..self.adj_list.len() {
                 let State { cost, position } = State { cost: self.dist[i], position: i };
-                if cost == isize::MAX { continue; }
+                if cost == i64::MAX { continue; }
                 for edge in &self.adj_list[i] {
                     let next = State { cost: cost + edge.cost, position: edge.node };
                     if next.cost < self.dist[next.position] {
@@ -62,14 +62,14 @@ impl<'a> BellmanFord<'a> {
             if !update { break; }
         }
         match self.dist[goal] {
-            isize::MAX => None,
+            i64::MAX => None,
             _          => Some(self.dist[goal])
         }
     }
 
     #[allow(dead_code)]
     fn shortest_path(&self, goal: usize) -> Option<Vec<usize>> {
-        if self.negative_loop || self.dist[goal] == isize::MAX { return None; }
+        if self.negative_loop || self.dist[goal] == i64::MAX { return None; }
         let mut path = Vec::new();
         let mut p = goal;
         while p != usize::MAX {

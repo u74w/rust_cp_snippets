@@ -1,11 +1,12 @@
 use std::cmp::Ordering;
 use std::collections::BinaryHeap;
 use std::usize;
+use std::u64;
 
 #[snippet = "dijkstra"]
 #[derive(Copy, Clone, Eq, PartialEq)]
 struct State {
-    cost: usize,
+    cost: u64,
     position: usize,
 }
 
@@ -30,13 +31,13 @@ impl PartialOrd for State {
 #[derive(Clone)]
 struct Edge {
     node: usize,
-    cost: usize,
+    cost: u64,
 }
 
 #[snippet = "dijkstra"]
 struct Dijkstra<'a> {
     adj_list: &'a Vec<Vec<Edge>>,
-    dist    : Vec<usize>,
+    dist    : Vec<u64>,
     prev    : Vec<usize>,
     start   : usize
 }
@@ -47,15 +48,15 @@ impl<'a> Dijkstra<'a> {
     fn new(adj_list: &'a Vec<Vec<Edge>>, start: usize) -> Self {
         Dijkstra {
             adj_list: adj_list,
-            dist    : (0..adj_list.len()).map(|_| usize::MAX).collect(),
+            dist    : (0..adj_list.len()).map(|_| u64::MAX).collect(),
             prev    : (0..adj_list.len()).map(|_| usize::MAX).collect(),
             start   : start
         }
     }
 
     #[allow(dead_code)]
-    fn shortest_dist(&mut self, goal: usize) -> Option<usize> {
-        if self.dist[goal] != usize::MAX { return Some(self.dist[goal]); }
+    fn shortest_dist(&mut self, goal: usize) -> Option<u64> {
+        if self.dist[goal] != u64::MAX { return Some(self.dist[goal]); }
         let mut heap = BinaryHeap::new();
         self.dist[self.start] = 0;
         heap.push(State { cost: 0, position: self.start });
@@ -72,14 +73,14 @@ impl<'a> Dijkstra<'a> {
             }
         }
         match self.dist[goal] {
-            usize::MAX => None,
+            u64::MAX => None,
             _          => Some(self.dist[goal])
         }
     }
 
     #[allow(dead_code)]
     fn shortest_path(&self, goal: usize) -> Option<Vec<usize>> {
-        if self.dist[goal] == usize::MAX { return None; }
+        if self.dist[goal] == u64::MAX { return None; }
         let mut path = Vec::new();
         let mut p = goal;
         while p != usize::MAX {
