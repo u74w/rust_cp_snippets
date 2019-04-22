@@ -100,3 +100,33 @@ fn test_total() {
         assert!(w[0] <= w[1]);
     }
 }
+
+#[snippet = "scan"]
+#[allow(dead_code)]
+struct Scanner {
+    buffer: std::collections::VecDeque<String>
+}
+
+#[snippet = "scan"]
+/// let mut scan = Scanner::new();
+/// let x = scan.next::<T>();
+impl Scanner {
+    #[allow(dead_code)]
+    fn new() -> Scanner {
+        Scanner {
+            buffer: std::collections::VecDeque::new()
+        }
+    }
+
+    #[allow(dead_code)]
+    fn next<T: std::str::FromStr>(&mut self) -> T {
+        while self.buffer.is_empty() {
+            let mut input = String::new();
+            std::io::stdin().read_line(&mut input).ok();
+            self.buffer = input.split_whitespace()
+                .map(ToString::to_string).collect();
+        }
+        let front = self.buffer.pop_front().unwrap();
+        front.parse::<T>().ok().unwrap()
+    }
+}
