@@ -74,7 +74,7 @@ impl<'a> Dijkstra<'a> {
         }
         match self.dist[goal] {
             u64::MAX => None,
-            _          => Some(self.dist[goal])
+            _        => Some(self.dist[goal])
         }
     }
 

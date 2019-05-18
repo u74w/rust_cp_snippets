@@ -130,3 +130,29 @@ impl Scanner {
         front.parse::<T>().ok().unwrap()
     }
 }
+
+#[snippet = "global variable"]
+use std::cell::RefCell;
+use std::rc::Rc;
+
+#[snippet = "global variable"]
+/// let global = get_rc_mut();
+/// global.borrow_mut().push(1);
+/// let x = global.borrow()[0];
+thread_local!(static RC_MUT: Rc<RefCell<Vec<usize>>> = {
+    let global = Vec::new();
+    Rc::new(RefCell::new(global))
+});
+
+#[snippet = "global variable"]
+pub fn get_rc_mut() -> Rc<RefCell<Vec<usize>>> {
+    RC_MUT.with(|rc| rc.clone())
+}
+
+#[test]
+fn test_global_variable() {
+    let global = get_rc_mut();
+    global.borrow_mut().push(1);
+    assert_eq!(1, global.borrow()[0]);
+    assert_eq!(1, global.borrow_mut().pop().unwrap());
+}
