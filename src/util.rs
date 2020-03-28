@@ -1,4 +1,6 @@
-#[snippet = "matrix_swap"]
+use cargo_snippet::snippet;
+
+#[snippet("matrix_swap")]
 #[allow(dead_code)]
 pub fn matrix_swap<T>(v: &mut Vec<Vec<T>>, i1: usize, j1: usize, i2: usize, j2: usize) {
     if i1 == i2 {
@@ -22,7 +24,7 @@ fn test_matrix_swap() {
     assert_eq!(v[1][0], 3);
 }
 
-#[snippet = "adjacent4"]
+#[snippet("adjacent4")]
 ///refer to https://github.com/hatoo/competitive-rust-snippets
 pub fn adjacent4(x: usize, y: usize, xsize: usize, ysize: usize) -> Vec<(usize, usize)> {
     [(1, 0), (0, 1), (-1, 0), (0, -1)]
@@ -48,19 +50,19 @@ fn test_adjacent4() {
 
 use std::cmp::Ordering;
 
-#[snippet = "Rev"]
+#[snippet("Rev")]
 #[derive(Eq, PartialEq, Clone, Debug)]
 ///vector.sort_by_key(|&x| Rev(x));
 struct Rev<T>(pub T);
 
-#[snippet = "Rev"]
+#[snippet("Rev")]
 impl<T: PartialOrd> PartialOrd for Rev<T> {
     fn partial_cmp(&self, other: &Rev<T>) -> Option<Ordering> {
         other.0.partial_cmp(&self.0)
     }
 }
 
-#[snippet = "Rev"]
+#[snippet("Rev")]
 impl<T: Ord> Ord for Rev<T> {
     fn cmp(&self, other: &Rev<T>) -> Ordering {
         other.0.cmp(&self.0)
@@ -77,14 +79,14 @@ fn test_rev() {
     }
 }
 
-#[snippet = "Total"]
+#[snippet("Total")]
 #[derive(PartialEq, PartialOrd)]
 pub struct Total<T>(pub T);
 
-#[snippet = "Total"]
+#[snippet("Total")]
 impl<T: PartialEq> Eq for Total<T> {}
 
-#[snippet = "Total"]
+#[snippet("Total")]
 impl<T: PartialOrd> Ord for Total<T> {
     fn cmp(&self, other: &Total<T>) -> std::cmp::Ordering {
         self.0.partial_cmp(&other.0).unwrap()
@@ -101,13 +103,13 @@ fn test_total() {
     }
 }
 
-#[snippet = "scan"]
+#[snippet("scan")]
 #[allow(dead_code)]
 struct Scanner {
     buffer: std::collections::VecDeque<String>
 }
 
-#[snippet = "scan"]
+#[snippet("scan")]
 /// let mut scan = Scanner::new();
 /// let x = scan.next::<T>();
 impl Scanner {
@@ -131,11 +133,11 @@ impl Scanner {
     }
 }
 
-#[snippet = "global variable"]
+#[snippet("global variable")]
 use std::cell::RefCell;
 use std::rc::Rc;
 
-#[snippet = "global variable"]
+#[snippet("global variable")]
 /// let global = get_rc_mut();
 /// global.borrow_mut().push(1);
 /// let x = global.borrow()[0];
@@ -144,7 +146,7 @@ thread_local!(static RC_MUT: Rc<RefCell<Vec<usize>>> = {
     Rc::new(RefCell::new(global))
 });
 
-#[snippet = "global variable"]
+#[snippet("global variable")]
 pub fn get_rc_mut() -> Rc<RefCell<Vec<usize>>> {
     RC_MUT.with(|rc| rc.clone())
 }

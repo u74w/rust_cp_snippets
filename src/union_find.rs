@@ -1,4 +1,6 @@
-#[snippet = "UnionFind"]
+use cargo_snippet::snippet;
+
+#[snippet("UnionFind")]
 #[allow(dead_code)]
 ///refer to https://github.com/hatoo/competitive-rust-snippets
 struct UnionFind {
@@ -7,7 +9,7 @@ struct UnionFind {
     size: Vec<usize>
 }
 
-#[snippet = "UnionFind"]
+#[snippet("UnionFind")]
 impl UnionFind {
     #[allow(dead_code)]
     fn new(n: usize) -> Self {

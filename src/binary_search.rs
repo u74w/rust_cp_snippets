@@ -1,13 +1,14 @@
+use cargo_snippet::snippet;
 use std::cmp::Ordering;
 
-#[snippet = "BinarySearch"]
+#[snippet("BinarySearch")]
 ///refer to https://github.com/hatoo/competitive-rust-snippets
 pub trait BinarySearch<T> {
     fn lower_bound(&self, x: &T) -> usize;
     fn upper_bound(&self, x: &T) -> usize;
 }
 
-#[snippet = "BinarySearch"]
+#[snippet("BinarySearch")]
 impl<T: Ord> BinarySearch<T> for [T] {
     fn lower_bound(&self, x: &T) -> usize {
         let mut low = 0;

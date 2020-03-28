@@ -1,21 +1,23 @@
 use std::usize;
 use std::i64;
+use cargo_snippet::snippet;
 
-#[snippet = "bellman_ford"]
+#[snippet("bellman_ford")]
 #[derive(Copy, Clone, Eq, PartialEq)]
 struct State {
     cost: i64,
     position: usize,
 }
 
-#[snippet = "bellman_ford"]
+#[snippet("bellman_ford")]
 #[derive(Clone)]
 struct Edge {
     node: usize,
     cost: i64,
 }
 
-#[snippet = "bellman_ford"]
+#[snippet("bellman_ford")]
+#[derive(Clone)]
 struct BellmanFord<'a> {
     adj_list     : &'a Vec<Vec<Edge>>,
     dist         : Vec<i64>,
@@ -24,7 +26,7 @@ struct BellmanFord<'a> {
     negative_loop: bool
 }
 
-#[snippet = "bellman_ford"]
+#[snippet("bellman_ford")]
 impl<'a> BellmanFord<'a> {
     #[allow(dead_code)]
     fn new(adj_list: &'a Vec<Vec<Edge>>, start: usize) -> Self {

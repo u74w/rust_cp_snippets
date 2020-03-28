@@ -1,20 +1,22 @@
-#[snippet = "template"]
+use cargo_snippet::snippet;
+
+#[snippet("template")]
 #[allow(unused_imports)]
 use std::io::{stdin, stdout, stderr, BufWriter, Write, StdoutLock};
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(unused_imports)]
 use std::cmp::{max, min, Ordering};
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(unused_imports)]
 use std::collections::{BTreeMap, BTreeSet, BinaryHeap, HashMap, HashSet, VecDeque};
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(unused_imports)]
 use std::iter::FromIterator;
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(unused_imports)]
 use std::{usize, u64, i64};
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(unused_macros)]
 macro_rules! input {
     (source = $s:expr, $($r:tt)*) => {
@@ -37,7 +39,7 @@ macro_rules! input {
     };
 }
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(unused_macros)]
 macro_rules! input_inner {
     ($next:expr) => {};
@@ -54,7 +56,7 @@ macro_rules! input_inner {
     };
 }
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(unused_macros)]
 macro_rules! read_value {
     ($next:expr, ( $($t:tt),* )) => {
@@ -89,17 +91,17 @@ macro_rules! read_value {
     };
 }
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(dead_code)]
 struct Writer {
     s: String,
 }
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(unused_imports)]
 use std::fmt::Display;
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(dead_code)]
 /// let mut writer = Writer::new();
 /// writer.writeln(hoge);
@@ -137,7 +139,7 @@ impl Writer {
     }
 }
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(unused_macros)]
 macro_rules! dbg {
     ($($a:expr),*) => {
@@ -145,16 +147,16 @@ macro_rules! dbg {
     }
 }
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(dead_code)]
 const INF_U: u64 = 1_000_000_000_000_000;
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(dead_code)]
 const INF_I: i64 = 1_000_000_000_000_000;
 
 
-#[snippet = "template"]
+#[snippet("template")]
 #[allow(non_snake_case)]
 #[allow(dead_code)]
 fn main() {
@@ -162,11 +164,11 @@ fn main() {
     let ans: u64;
 }
 
-#[snippet = "big_stack"]
+#[snippet("big_stack")]
 #[allow(dead_code)]
 const BIG_STACK_SIZE: bool = true;
 
-#[snippet = "big_stack"]
+#[snippet("big_stack")]
 #[allow(dead_code)]
 fn big_stack() {
 	use std::thread;
@@ -183,7 +185,7 @@ fn big_stack() {
 	}
 }
 
-#[snippet = "big_stack"]
+#[snippet("big_stack")]
 #[allow(dead_code)]
 fn solve() {}
 

@@ -5,4 +5,4 @@ authors = ["p232069y <p232069y@mail.kyutech.jp>"]
 edition = "2018"
 
 [dependencies]
-cargo-snippet = "0.2.5"
+cargo-snippet = "0.6.1"

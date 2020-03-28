@@ -1,16 +1,17 @@
+use cargo_snippet::snippet;
 use std::cmp::Ordering;
 use std::collections::BinaryHeap;
 use std::usize;
 use std::u64;
 
-#[snippet = "dijkstra"]
+#[snippet("dijkstra")]
 #[derive(Copy, Clone, Eq, PartialEq)]
 struct State {
     cost: u64,
     position: usize,
 }
 
-#[snippet = "dijkstra"]
+#[snippet("dijkstra")]
 impl Ord for State {
     fn cmp(&self, other: &State) -> Ordering {
         match other.cost.cmp(&self.cost) {
@@ -20,21 +21,21 @@ impl Ord for State {
     }
 }
 
-#[snippet = "dijkstra"]
+#[snippet("dijkstra")]
 impl PartialOrd for State {
     fn partial_cmp(&self, other: &State) -> Option<Ordering> {
         Some(self.cmp(other))
     }
 }
 
-#[snippet = "dijkstra"]
+#[snippet("dijkstra")]
 #[derive(Clone)]
 struct Edge {
     node: usize,
     cost: u64,
 }
 
-#[snippet = "dijkstra"]
+#[snippet("dijkstra")]
 struct Dijkstra<'a> {
     adj_list: &'a Vec<Vec<Edge>>,
     dist    : Vec<u64>,
@@ -42,7 +43,7 @@ struct Dijkstra<'a> {
     start   : usize
 }
 
-#[snippet = "dijkstra"]
+#[snippet("dijkstra")]
 impl<'a> Dijkstra<'a> {
     #[allow(dead_code)]
     fn new(adj_list: &'a Vec<Vec<Edge>>, start: usize) -> Self {

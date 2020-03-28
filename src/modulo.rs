@@ -1,9 +1,10 @@
-#[snippet = "mod"]
+use cargo_snippet::snippet;
+#[snippet("mod")]
 #[allow(dead_code)]
 ///refer to https://github.com/hatoo/competitive-rust-snippets
 pub const MOD: u64 = 1_000_000_007;
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 pub fn gcd(a: u64, b: u64) -> u64 {
     if b == 0 {
@@ -13,13 +14,13 @@ pub fn gcd(a: u64, b: u64) -> u64 {
     }
 }
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 pub fn lcm(a: u64, b: u64) -> u64 {
     a / gcd(a, b) * b
 }
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 pub fn extgcd(a: i64, b: i64) -> (i64, i64, i64) {
     if b == 0 {
@@ -30,7 +31,7 @@ pub fn extgcd(a: i64, b: i64) -> (i64, i64, i64) {
     }
 }
 
-#[snippet = "prime"]
+#[snippet("prime")]
 #[allow(dead_code)]
 pub fn prime(n: u64) -> Vec<bool> {
     let mut prime: Vec<bool> = vec![true; (n+1) as usize];
@@ -50,7 +51,7 @@ pub fn prime(n: u64) -> Vec<bool> {
     prime
 }
 
-#[snippet = "divisor"]
+#[snippet("divisor")]
 #[allow(dead_code)]
 pub fn divisor(n: u64) -> Vec<u64> {
     let mut div: Vec<u64> = Vec::new();
@@ -69,7 +70,7 @@ pub fn divisor(n: u64) -> Vec<u64> {
 }
 
 use std::collections::HashMap;
-#[snippet = "prime_factor"]
+#[snippet("prime_factor")]
 #[allow(dead_code)]
 pub fn prime_factor(n: u64) -> HashMap<u64, u64> {
     let mut prime_factors: HashMap<u64, u64> = HashMap::new();
@@ -88,7 +89,7 @@ pub fn prime_factor(n: u64) -> HashMap<u64, u64> {
     prime_factors
 }
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 pub fn mod_pow(x: u64, n: u64, m: u64) -> u64 {
     let mut res = 1;
@@ -104,14 +105,14 @@ pub fn mod_pow(x: u64, n: u64, m: u64) -> u64 {
     res
 }
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 pub fn mod_inv(a: u64, m: u64) -> u64 {
     let (_, x, _) = extgcd(a as i64, m as i64);
     ((m as i64 + x) as u64 % m) % m
 }
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 pub fn fact_table(size: usize, m: u64) -> Vec<u64> {
     let mut table = vec![1; size + 1];
@@ -121,7 +122,7 @@ pub fn fact_table(size: usize, m: u64) -> Vec<u64> {
     table
 }
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 /// Factorial and Inverse factorial table
 pub fn fact_inv_table(size: usize, m: u64) -> (Vec<u64>, Vec<u64>) {
@@ -140,7 +141,7 @@ pub fn fact_inv_table(size: usize, m: u64) -> (Vec<u64>, Vec<u64>) {
     (fact, fact_inv)
 }
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 /// (a mod p, e when n! = a pe)
 pub fn mod_fact(n: u64, p: u64, fact: &[u64]) -> (u64, u64) {
@@ -158,7 +159,7 @@ pub fn mod_fact(n: u64, p: u64, fact: &[u64]) -> (u64, u64) {
     }
 }
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 /// C(n, k) % p
 pub fn mod_comb(n: u64, k: u64, p: u64, fact: &[u64]) -> u64 {
@@ -177,7 +178,7 @@ pub fn mod_comb(n: u64, k: u64, p: u64, fact: &[u64]) -> u64 {
     }
 }
 
-#[snippet = "mod"]
+#[snippet("mod")]
 #[allow(dead_code)]
 /// H(n, k) % p
 pub fn mod_comb_repetition(n: u64, k: u64, p: u64, fact: &[u64]) -> u64 {

@@ -1,6 +1,6 @@
 #![feature(plugin)]
 #![feature(test)]
-#![plugin(cargo_snippet)]
+//#![plugin(cargo_snippet)]
 
 extern crate test;
 
