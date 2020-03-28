@@ -1,6 +1,7 @@
+use cargo_snippet::snippet;
+
 use std::usize;
 use std::i64;
-use cargo_snippet::snippet;
 
 #[snippet("bellman_ford")]
 #[derive(Copy, Clone, Eq, PartialEq)]

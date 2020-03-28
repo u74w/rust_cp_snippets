@@ -161,7 +161,7 @@ const INF_I: i64 = 1_000_000_000_000_000;
 #[allow(dead_code)]
 fn main() {
     input!{}
-    let ans: u64;
+    let mut ans: u64;
 }
 
 #[snippet("big_stack")]
