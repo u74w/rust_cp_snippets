@@ -91,17 +91,17 @@ macro_rules! read_value {
     };
 }
 
-#[snippet("template")]
+#[snippet("Writer")]
 #[allow(dead_code)]
 struct Writer {
     s: String,
 }
 
-#[snippet("template")]
+#[snippet("Writer")]
 #[allow(unused_imports)]
 use std::fmt::Display;
 
-#[snippet("template")]
+#[snippet("Writer")]
 #[allow(dead_code)]
 /// let mut writer = Writer::new();
 /// writer.writeln(hoge);
@@ -147,11 +147,11 @@ macro_rules! dbg {
     }
 }
 
-#[snippet("template")]
+#[snippet("inf")]
 #[allow(dead_code)]
 const INF_U: u64 = 1_000_000_000_000_000;
 
-#[snippet("template")]
+#[snippet("inf")]
 #[allow(dead_code)]
 const INF_I: i64 = 1_000_000_000_000_000;
 
