@@ -1,23 +1,23 @@
 use cargo_snippet::snippet;
 
-#[snippet(seg)]
+#[snippet("seg")]
 trait Monoid {
     type T: Clone;
     fn id() -> Self::T;
     fn op(a: &Self::T, b: &Self::T) -> Self::T;
 }
 
-#[snippet(seg)]
+#[snippet("seg")]
 struct SegmentTree<M: Monoid> {
     n_leaf: usize,
     data  : Vec::<M::T>,
 }
 
-#[snippet(seg)]
+#[snippet("seg")]
 impl<M: Monoid> SegmentTree<M> {
     #[allow(dead_code)]
     fn new(_n: usize) -> SegmentTree<M> {
-        let mut n = _n;
+        let mut n = 1;
         while n < _n {
             n *= 2;
         }
@@ -58,7 +58,7 @@ impl<M: Monoid> SegmentTree<M> {
     }
 }
 
-#[snippet(seg)]
+#[snippet("seg")]
 impl<M: Monoid> std::ops::Index<usize> for SegmentTree<M> {
     type Output = M::T;
     fn index(&self, index: usize) -> &Self::Output {
@@ -66,10 +66,10 @@ impl<M: Monoid> std::ops::Index<usize> for SegmentTree<M> {
     }
 }
 
-#[snippet(seg)]
+#[snippet("segmini64")]
 struct MinI64;
 
-#[snippet(seg)]
+#[snippet("segmini64")]
 impl Monoid for MinI64 {
     type T = i64;
     fn id() -> Self::T {
@@ -80,10 +80,10 @@ impl Monoid for MinI64 {
     }
 }
 
-#[snippet(seg)]
+#[snippet("segminf64")]
 struct MinF64;
 
-#[snippet(seg)]
+#[snippet("segminf64")]
 impl Monoid for MinF64 {
     type T = f64;
     fn id() -> Self::T {
@@ -94,10 +94,10 @@ impl Monoid for MinF64 {
     }
 }
 
-#[snippet(seg)]
+#[snippet("segsumi64")]
 struct SumI64;
 
-#[snippet(seg)]
+#[snippet("segsumi64")]
 impl Monoid for SumI64 {
     type T = i64;
     fn id() -> Self::T {
@@ -108,10 +108,10 @@ impl Monoid for SumI64 {
     }
 }
 
-#[snippet(seg)]
+#[snippet("segsumf64")]
 struct SumF64;
 
-#[snippet(seg)]
+#[snippet("segsumf64")]
 impl Monoid for SumF64 {
     type T = f64;
     fn id() -> Self::T {
