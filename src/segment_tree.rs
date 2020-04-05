@@ -67,7 +67,7 @@ impl<M: Monoid> std::ops::Index<usize> for SegmentTree<M> {
 }
 
 #[snippet("segmini64")]
-struct MinI64;
+enum MinI64 {}
 
 #[snippet("segmini64")]
 impl Monoid for MinI64 {
@@ -81,7 +81,7 @@ impl Monoid for MinI64 {
 }
 
 #[snippet("segminf64")]
-struct MinF64;
+enum MinF64 {}
 
 #[snippet("segminf64")]
 impl Monoid for MinF64 {
@@ -95,7 +95,7 @@ impl Monoid for MinF64 {
 }
 
 #[snippet("segsumi64")]
-struct SumI64;
+enum SumI64 {}
 
 #[snippet("segsumi64")]
 impl Monoid for SumI64 {
@@ -109,7 +109,7 @@ impl Monoid for SumI64 {
 }
 
 #[snippet("segsumf64")]
-struct SumF64;
+enum SumF64 {}
 
 #[snippet("segsumf64")]
 impl Monoid for SumF64 {
